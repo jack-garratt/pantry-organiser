@@ -1,23 +1,19 @@
-name: Build Android APK
-on: [push, pull_request]
-
+on:
+  push:
+    branches: [ main ]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Build with Buildozer
-        uses: pypa/buildozer-action@v1
+      - name: Build APK
+        uses: digreatbrian/buildozer-action@v2
         with:
-          save_buildozer_config: true
-          # This runs the actual build command
-          command: buildozer android debug
-          # Optional: point to your buildozer.spec if it's not in the root
-          repository_root: .
+          python-version: 3.13
+          buildozer-cmd: buildozer -v android debug
 
-      - name: Upload APK
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: pantry-organiser-apk
-          path: bin/*.apk
+          name: package
+          path: ./bin/*.apk

@@ -58,8 +58,12 @@ class Body(ScrollView):
         super(Body,self).__init__(**kwargs)
         self.layout = BoxLayout(orientation='vertical', size_hint_y=None, spacing = 20, padding = 20)
         self.layout.bind(minimum_height=self.layout.setter('height'))
+        items_dict = {}
         for item in items:
-            self.add_item_widget(item)
+            items_dict[item.get_name()] = item
+            items_dict = dict(sorted(items_dict.items()))
+        for item in items_dict:
+            self.add_item_widget(items_dict[item])
         self.add_widget(self.layout)
 
     def add_item_widget(self, item):

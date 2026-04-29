@@ -13,7 +13,7 @@ from kivy.utils import get_color_from_hex
 from db_utils import generate_items,add_item
 from item import Item
 
-Window.size = (540, 1170)
+Window.size = (1080, 2340)
 Window.clearcolor = get_color_from_hex("#1C1C1Cff")
 
 class Header(BoxLayout):
@@ -86,6 +86,7 @@ class Footer(BoxLayout):
 class Root(BoxLayout):
     def __init__(self, items,**kwargs):
         super(Root, self).__init__(**kwargs)
+        self.size = ()
         header = Header(size_hint = (1, 0.1))
         body = Body(items)
         footer = Footer(body,size_hint = (1, 0.075),padding = 16, spacing = 8 )
